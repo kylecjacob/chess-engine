@@ -1,35 +1,179 @@
 <div class="container">    
     <img class="board" src="../../assets/images/board.jpg" alt="chess-board">
-    <img (click)="pieceClicked(a2Pawn)" class="a2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
-    <img class="b2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
-    <img class="c2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
-    <img class="d2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
-    <img class="e2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
-    <img class="f2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
-    <img class="g2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
-    <img class="h2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
-    <img class="a1-rook" src="../../assets/images/white_rook.png" alt="rook">
-    <img class="h1-rook" src="../../assets/images/white_rook.png" alt="rook">
-    <img class="b1-knight" src="../../assets/images/white_knight.png" alt="knight">
-    <img class="g1-knight" src="../../assets/images/white_knight.png" alt="knight">
-    <img class="c1-bishop" src="../../assets/images/white_bishop.png" alt="bishop">
-    <img class="f1-bishop" src="../../assets/images/white_bishop.png" alt="bishop">
-    <img class="white-queen" src="../../assets/images/white_queen.png" alt="queen">
-    <img class="white-king" src="../../assets/images/white_king.png" alt="king">
-    <img class="a7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="b7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="c7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="d7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="e7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="f7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="g7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="h7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="a8-rook" src="../../assets/images/black_rook.png" alt="rook">
-    <img class="h8-rook" src="../../assets/images/black_rook.png" alt="rook">
-    <img class="b8-knight" src="../../assets/images/black_knight.png" alt="knight">
-    <img class="g8-knight" src="../../assets/images/black_knight.png" alt="knight">
-    <img class="c8-bishop" src="../../assets/images/black_bishop.png" alt="bishop">
-    <img class="f8-bishop" src="../../assets/images/black_bishop.png" alt="bishop">
-    <img class="black-queen" src="../../assets/images/black_queen.png" alt="queen">
-    <img class="black-king" src="../../assets/images/black_king.png" alt="king">
+    <img (click)="onPawnClicked(a2Pawn)" id="a2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
+    <img (click)="onPawnClicked(b2Pawn)" id="b2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
+    <img (click)="onPawnClicked(c2Pawn)" id="c2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
+    <img (click)="onPawnClicked(d2Pawn)" id="d2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
+    <img (click)="onPawnClicked(e2Pawn)" id="e2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
+    <img (click)="onPawnClicked(f2Pawn)" id="f2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
+    <img (click)="onPawnClicked(g2Pawn)" id="g2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
+    <img (click)="onPawnClicked(h2Pawn)" id="h2-pawn" src="../../assets/images/white_pawn.png" alt="pawn">
+    <img id="a1-rook" src="../../assets/images/white_rook.png" alt="rook">
+    <img id="h1-rook" src="../../assets/images/white_rook.png" alt="rook">
+    <img id="b1-knight" src="../../assets/images/white_knight.png" alt="knight">
+    <img id="g1-knight" src="../../assets/images/white_knight.png" alt="knight">
+    <img id="c1-bishop" src="../../assets/images/white_bishop.png" alt="bishop">
+    <img id="f1-bishop" src="../../assets/images/white_bishop.png" alt="bishop">
+    <img id="white-queen" src="../../assets/images/white_queen.png" alt="queen">
+    <img id="white-king" src="../../assets/images/white_king.png" alt="king">
+    <img id="a7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="b7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="c7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="d7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="e7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="f7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="g7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="h7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="a8-rook" src="../../assets/images/black_rook.png" alt="rook">
+    <img id="h8-rook" src="../../assets/images/black_rook.png" alt="rook">
+    <img id="b8-knight" src="../../assets/images/black_knight.png" alt="knight">
+    <img id="g8-knight" src="../../assets/images/black_knight.png" alt="knight">
+    <img id="c8-bishop" src="../../assets/images/black_bishop.png" alt="bishop">
+    <img id="f8-bishop" src="../../assets/images/black_bishop.png" alt="bishop">
+    <img id="black-queen" src="../../assets/images/black_queen.png" alt="queen">
+    <img id="black-king" src="../../assets/images/black_king.png" alt="king">
+
+    <img class="indicator" id="a1-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="a2-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="a3-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="a4-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="a5-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="a6-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="a7-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="a8-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+
+    <img class="indicator" id="b1-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="b2-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="b3-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="b4-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="b5-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="b6-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="b7-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="b8-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+
+    <img class="indicator" id="c1-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="c2-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="c3-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="c4-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="c5-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="c6-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="c7-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="c8-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+
+    <img class="indicator" id="d1-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="d2-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="d3-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="d4-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="d5-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="d6-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="d7-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="d8-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+
+    <img class="indicator" id="e1-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="e2-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="e3-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="e4-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="e5-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="e6-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="e7-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="e8-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+
+    <img class="indicator" id="f1-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="f2-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="f3-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="f4-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="f5-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="f6-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="f7-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="f8-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+
+    <img class="indicator" id="g1-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="g2-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="g3-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="g4-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="g5-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="g6-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="g7-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="g8-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+
+    <img class="indicator" id="h1-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="h2-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="h3-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="h4-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="h5-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="h6-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="h7-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+    <img class="indicator" id="h8-ind" src="../../assets/images/valid_moves_ind.png" alt="valid_moves_ind">
+
+    <div (click)="spaceClicked('a1')" id="a1"></div>
+    <div id="a2"></div>
+    <div id="a3"></div>
+    <div id="a4"></div>
+    <div id="a5"></div>
+    <div id="a6"></div>
+    <div id="a7"></div>
+    <div id="a8"></div>
+
+    <div id="b1"></div>
+    <div id="b2"></div>
+    <div id="b3"></div>
+    <div id="b4"></div>
+    <div id="b5"></div>
+    <div id="b6"></div>
+    <div id="b7"></div>
+    <div id="b8"></div>
+
+    <div id="c1"></div>
+    <div id="c2"></div>
+    <div id="c3"></div>
+    <div id="c4"></div>
+    <div id="c5"></div>
+    <div id="c6"></div>
+    <div id="c7"></div>
+    <div id="c8"></div>
+
+    <div id="d1"></div>
+    <div id="d2"></div>
+    <div id="d3"></div>
+    <div id="d4"></div>
+    <div id="d5"></div>
+    <div id="d6"></div>
+    <div id="d7"></div>
+    <div id="d8"></div>
+
+    <div id="e1"></div>
+    <div id="e2"></div>
+    <div id="e3"></div>
+    <div id="e4"></div>
+    <div id="e5"></div>
+    <div id="e6"></div>
+    <div id="e7"></div>
+    <div id="e8"></div>
+
+    <div id="f1"></div>
+    <div id="f2"></div>
+    <div id="f3"></div>
+    <div id="f4"></div>
+    <div id="f5"></div>
+    <div id="f6"></div>
+    <div id="f7"></div>
+    <div id="f8"></div>
+
+    <div id="g1"></div>
+    <div id="g2"></div>
+    <div id="g3"></div>
+    <div id="g4"></div>
+    <div id="g5"></div>
+    <div id="g6"></div>
+    <div id="g7"></div>
+    <div id="g8"></div>
+
+    <div id="h1"></div>
+    <div id="h2"></div>
+    <div id="h3"></div>
+    <div id="h4"></div>
+    <div id="h5"></div>
+    <div id="h6"></div>
+    <div id="h7"></div>
+    <div id="h8"></div>
 </div>

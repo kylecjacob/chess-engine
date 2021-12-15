@@ -1,18 +1,16 @@
-import { IPosition, Position } from "./Position";
+import { Position } from './Position';
 
-export interface IPiece {
-    type: string;
-    position: Position;
-    validMoves: string[];
-}
-
-export class Piece implements IPiece {
+export class Piece {
     type: string = '';
-    position: IPosition = new Position();
-    validMoves: string[] = [];
+    position: Position = new Position();
+    validMoves: Position[] = [];
+    color: string = '';
 
-    constructor(type: string, position: Position) {
-        this.type = type;
-        this.position = position;
+    constructor();
+    constructor(type: string, position: Position, color: string);
+    constructor(type?: string, position?: Position, color?: string) {
+        this.type = type!;
+        this.position = position!;
+        this.color = color!;
     }
 }
