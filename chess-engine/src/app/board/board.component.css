@@ -14,7 +14,6 @@
 }
 
 #a2-pawn {
-    cursor: pointer;
     position: absolute;
     top: 679px;
     left: 168px;
@@ -22,7 +21,6 @@
 }
 
 #b2-pawn {
-    cursor: pointer;
     position: absolute;
     top: 679px;
     left: 270px;
@@ -30,7 +28,6 @@
 }
 
 #c2-pawn {
-    cursor: pointer;
     position: absolute;
     top: 679px;
     left: 372px;
@@ -38,7 +35,6 @@
 }
 
 #d2-pawn {
-    cursor: pointer;
     position: absolute;
     top: 679px;
     left: 474px;
@@ -46,7 +42,6 @@
 }
 
 #e2-pawn {
-    cursor: pointer;
     position: absolute;
     top: 679px;
     left: 576px;
@@ -54,7 +49,6 @@
 }
 
 #f2-pawn {
-    cursor: pointer;
     position: absolute;
     top: 679px;
     left: 678px;
@@ -62,7 +56,6 @@
 }
 
 #g2-pawn {
-    cursor: pointer;
     position: absolute;
     top: 679px;
     left: 780px;
@@ -70,7 +63,6 @@
 }
 
 #h2-pawn {
-    cursor: pointer;
     position: absolute;
     top: 679px;
     left: 882px;
@@ -78,7 +70,6 @@
 }
 
 #a1-rook {
-    cursor: pointer;
     position: absolute;
     top: 781px;
     left: 168px;
@@ -86,7 +77,6 @@
 }
 
 #h1-rook {
-    cursor: pointer;
     position: absolute;
     top: 781px;
     left: 882px;
@@ -94,7 +84,6 @@
 }
 
 #b1-knight {
-    cursor: pointer;
     position: absolute;
     top: 781px;
     left: 270px;
@@ -102,7 +91,6 @@
 }
 
 #g1-knight {
-    cursor: pointer;
     position: absolute;
     top: 781px;
     left: 780px;
@@ -110,7 +98,6 @@
 }
 
 #c1-bishop {
-    cursor: pointer;
     position: absolute;
     top: 781px;
     left: 372px;
@@ -118,7 +105,6 @@
 }
 
 #f1-bishop {
-    cursor: pointer;
     position: absolute;
     top: 781px;
     left: 678px;
@@ -126,7 +112,6 @@
 }
 
 #white-queen {
-    cursor: pointer;
     position: absolute;
     top: 781px;
     left: 474px;
@@ -134,7 +119,6 @@
 }
 
 #white-king {
-    cursor: pointer;
     position: absolute;
     top: 781px;
     left: 576px;
@@ -142,7 +126,6 @@
 }
 
 #a7-pawn {
-    cursor: pointer;
     position: absolute;
     top: 169px;
     left: 168px;
@@ -150,7 +133,6 @@
 }
 
 #b7-pawn {
-    cursor: pointer;
     position: absolute;
     top: 169px;
     left: 270px;
@@ -158,7 +140,6 @@
 }
 
 #c7-pawn {
-    cursor: pointer;
     position: absolute;
     top: 169px;
     left: 372px;
@@ -166,7 +147,6 @@
 }
 
 #d7-pawn {
-    cursor: pointer;
     position: absolute;
     top: 169px;
     left: 474px;
@@ -174,7 +154,6 @@
 }
 
 #e7-pawn {
-    cursor: pointer;
     position: absolute;
     top: 169px;
     left: 576px;
@@ -182,7 +161,6 @@
 }
 
 #f7-pawn {
-    cursor: pointer;
     position: absolute;
     top: 169px;
     left: 678px;
@@ -190,7 +168,6 @@
 }
 
 #g7-pawn {
-    cursor: pointer;
     position: absolute;
     top: 169px;
     left: 780px;
@@ -198,7 +175,6 @@
 }
 
 #h7-pawn {
-    cursor: pointer;
     position: absolute;
     top: 169px;
     left: 882px;
@@ -206,7 +182,6 @@
 }
 
 #a8-rook {
-    cursor: pointer;
     position: absolute;
     top: 67px;
     left: 168px;
@@ -214,7 +189,6 @@
 }
 
 #h8-rook {
-    cursor: pointer;
     position: absolute;
     top: 67px;
     left: 882px;
@@ -222,7 +196,6 @@
 }
 
 #b8-knight {
-    cursor: pointer;
     position: absolute;
     top: 67px;
     left: 270px;
@@ -230,7 +203,6 @@
 }
 
 #g8-knight {
-    cursor: pointer;
     position: absolute;
     top: 67px;
     left: 780px;
@@ -238,7 +210,6 @@
 }
 
 #c8-bishop {
-    cursor: pointer;
     position: absolute;
     top: 68px;
     left: 372px;
@@ -246,7 +217,6 @@
 }
 
 #f8-bishop {
-    cursor: pointer;
     position: absolute;
     top: 68px;
     left: 678px;
@@ -254,7 +224,6 @@
 }
 
 #black-queen {
-    cursor: pointer;
     position: absolute;
     top: 68px;
     left: 474px;
@@ -262,7 +231,6 @@
 }
 
 #black-king {
-    cursor: pointer;
     position: absolute;
     top: 68px;
     left: 576px;
@@ -846,7 +814,6 @@
 }
 
 #a1 {
-    cursor: pointer;
     position: absolute;
     top: 775px;
     left: 162px;
@@ -854,7 +821,7 @@
     width: 102px;
 }
 
-#a2 {
+#b1 {
     position: absolute;
     top: 775px;
     left: 264px;
@@ -862,7 +829,7 @@
     width: 102px;
 }
 
-#a3 {
+#c1 {
     position: absolute;
     top: 775px;
     left: 366px;
@@ -870,7 +837,7 @@
     width: 102px;
 }
 
-#a4 {
+#d1 {
     position: absolute;
     top: 775px;
     left: 468px;
@@ -878,7 +845,7 @@
     width: 102px;
 }
 
-#a5 {
+#e1 {
     position: absolute;
     top: 775px;
     left: 570px;
@@ -886,7 +853,7 @@
     width: 102px;
 }
 
-#a6 {
+#f1 {
     position: absolute;
     top: 775px;
     left: 672px;
@@ -894,7 +861,7 @@
     width: 102px;
 }
 
-#a7 {
+#g1 {
     position: absolute;
     top: 775px;
     left: 774px;
@@ -902,10 +869,466 @@
     width: 102px;
 }
 
-#a8 {
+#h1 {
     position: absolute;
     top: 775px;
     left: 876px;
     height: 102px;
     width: 102px;
+}
+
+#a2 {
+    position: absolute;
+    top: 673px;
+    left: 162px;
+    height: 102px;
+    width: 102px;
+}
+
+#b2 {
+    position: absolute;
+    top: 673px;
+    left: 264px;
+    height: 102px;
+    width: 102px;
+}
+
+#c2 {
+    position: absolute;
+    top: 673px;
+    left: 366px;
+    height: 102px;
+    width: 102px;
+}
+
+#d2 {
+    position: absolute;
+    top: 673px;
+    left: 468px;
+    height: 102px;
+    width: 102px;
+}
+
+#e2 {
+    position: absolute;
+    top: 673px;
+    left: 570px;
+    height: 102px;
+    width: 102px;
+}
+
+#f2 {
+    position: absolute;
+    top: 673px;
+    left: 672px;
+    height: 102px;
+    width: 102px;
+}
+
+#g2 {
+    position: absolute;
+    top: 673px;
+    left: 774px;
+    height: 102px;
+    width: 102px;
+}
+
+#h2 {
+    position: absolute;
+    top: 673px;
+    left: 876px;
+    height: 102px;
+    width: 102px;
+}
+
+#a3 {
+    position: absolute;
+    top: 571px;
+    left: 162px;
+    height: 102px;
+    width: 102px;
+}
+
+#b3 {
+    position: absolute;
+    top: 571px;
+    left: 264px;
+    height: 102px;
+    width: 102px;
+}
+
+#c3 {
+    position: absolute;
+    top: 571px;
+    left: 366px;
+    height: 102px;
+    width: 102px;
+}
+
+#d3 {
+    position: absolute;
+    top: 571px;
+    left: 468px;
+    height: 102px;
+    width: 102px;
+}
+
+#e3 {
+    position: absolute;
+    top: 571px;
+    left: 570px;
+    height: 102px;
+    width: 102px;
+}
+
+#f3 {
+    position: absolute;
+    top: 571px;
+    left: 672px;
+    height: 102px;
+    width: 102px;
+}
+
+#g3 {
+    position: absolute;
+    top: 571px;
+    left: 774px;
+    height: 102px;
+    width: 102px;
+}
+
+#h3 {
+    position: absolute;
+    top: 571px;
+    left: 876px;
+    height: 102px;
+    width: 102px;
+}
+
+#a4 {
+    position: absolute;
+    top: 469px;
+    left: 162px;
+    height: 102px;
+    width: 102px;
+}
+
+#b4 {
+    position: absolute;
+    top: 469px;
+    left: 264px;
+    height: 102px;
+    width: 102px;
+}
+
+#c4 {
+    position: absolute;
+    top: 469px;
+    left: 366px;
+    height: 102px;
+    width: 102px;
+}
+
+#d4 {
+    position: absolute;
+    top: 469px;
+    left: 468px;
+    height: 102px;
+    width: 102px;
+}
+
+#e4 {
+    position: absolute;
+    top: 469px;
+    left: 570px;
+    height: 102px;
+    width: 102px;
+}
+
+#f4 {
+    position: absolute;
+    top: 469px;
+    left: 672px;
+    height: 102px;
+    width: 102px;
+}
+
+#g4 {
+    position: absolute;
+    top: 469px;
+    left: 774px;
+    height: 102px;
+    width: 102px;
+}
+
+#h4 {
+    position: absolute;
+    top: 469px;
+    left: 876px;
+    height: 102px;
+    width: 102px;
+}
+
+#a5 {
+    position: absolute;
+    top: 367px;
+    left: 162px;
+    height: 102px;
+    width: 102px;
+}
+
+#b5 {
+    position: absolute;
+    top: 367px;
+    left: 264px;
+    height: 102px;
+    width: 102px;
+}
+
+#c5 {
+    position: absolute;
+    top: 367px;
+    left: 366px;
+    height: 102px;
+    width: 102px;
+}
+
+#d5 {
+    position: absolute;
+    top: 367px;
+    left: 468px;
+    height: 102px;
+    width: 102px;
+}
+
+#e5 {
+    position: absolute;
+    top: 367px;
+    left: 570px;
+    height: 102px;
+    width: 102px;
+}
+
+#f5 {
+    position: absolute;
+    top: 367px;
+    left: 672px;
+    height: 102px;
+    width: 102px;
+}
+
+#g5 {
+    position: absolute;
+    top: 367px;
+    left: 774px;
+    height: 102px;
+    width: 102px;
+}
+
+#h5 {
+    position: absolute;
+    top: 367px;
+    left: 876px;
+    height: 102px;
+    width: 102px;
+}
+
+#a6 {
+    position: absolute;
+    top: 265px;
+    left: 162px;
+    height: 102px;
+    width: 102px;
+}
+
+#b6 {
+    position: absolute;
+    top: 265px;
+    left: 264px;
+    height: 102px;
+    width: 102px;
+}
+
+#c6 {
+    position: absolute;
+    top: 265px;
+    left: 366px;
+    height: 102px;
+    width: 102px;
+}
+
+#d6 {
+    position: absolute;
+    top: 265px;
+    left: 468px;
+    height: 102px;
+    width: 102px;
+}
+
+#e6 {
+    position: absolute;
+    top: 265px;
+    left: 570px;
+    height: 102px;
+    width: 102px;
+}
+
+#f6 {
+    position: absolute;
+    top: 265px;
+    left: 672px;
+    height: 102px;
+    width: 102px;
+}
+
+#g6 {
+    position: absolute;
+    top: 265px;
+    left: 774px;
+    height: 102px;
+    width: 102px;
+}
+
+#h6 {
+    position: absolute;
+    top: 265px;
+    left: 876px;
+    height: 102px;
+    width: 102px;
+}
+
+#a7 {
+    position: absolute;
+    top: 163px;
+    left: 162px;
+    height: 102px;
+    width: 102px;
+}
+
+#b7 {
+    position: absolute;
+    top: 163px;
+    left: 264px;
+    height: 102px;
+    width: 102px;
+}
+
+#c7 {
+    position: absolute;
+    top: 163px;
+    left: 366px;
+    height: 102px;
+    width: 102px;
+}
+
+#d7 {
+    position: absolute;
+    top: 163px;
+    left: 468px;
+    height: 102px;
+    width: 102px;
+}
+
+#e7 {
+    position: absolute;
+    top: 163px;
+    left: 570px;
+    height: 102px;
+    width: 102px;
+}
+
+#f7 {
+    position: absolute;
+    top: 163px;
+    left: 672px;
+    height: 102px;
+    width: 102px;
+}
+
+#g7 {
+    position: absolute;
+    top: 163px;
+    left: 774px;
+    height: 102px;
+    width: 102px;
+}
+
+#h7 {
+    position: absolute;
+    top: 163px;
+    left: 876px;
+    height: 102px;
+    width: 102px;
+}
+
+#a8 {
+    position: absolute;
+    top: 61px;
+    left: 162px;
+    height: 102px;
+    width: 102px;
+}
+
+#b8 {
+    position: absolute;
+    top: 61px;
+    left: 264px;
+    height: 102px;
+    width: 102px;
+}
+
+#c8 {
+    position: absolute;
+    top: 61px;
+    left: 366px;
+    height: 102px;
+    width: 102px;
+}
+
+#d8 {
+    position: absolute;
+    top: 61px;
+    left: 468px;
+    height: 102px;
+    width: 102px;
+}
+
+#e8 {
+    position: absolute;
+    top: 61px;
+    left: 570px;
+    height: 102px;
+    width: 102px;
+}
+
+#f8 {
+    position: absolute;
+    top: 61px;
+    left: 672px;
+    height: 102px;
+    width: 102px;
+}
+
+#g8 {
+    position: absolute;
+    top: 61px;
+    left: 774px;
+    height: 102px;
+    width: 102px;
+}
+
+#h8 {
+    position: absolute;
+    top: 61px;
+    left: 876px;
+    height: 102px;
+    width: 102px;
+}
+
+.piece {
+    cursor: pointer;
+}
+
+.square {
+    cursor: auto;
 }
