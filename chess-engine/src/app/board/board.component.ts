@@ -226,6 +226,10 @@ export class BoardComponent implements OnInit {
     // if not then check if there is a piece in context and if it's a valid move
     if (this.pieceClicked && this.pieceInContext) {
       if (this.pieceInContext.validMoves.includes(space)) {
+        if (this.pieceInContext.possibleTakes.includes(space)) {
+          let original: Piece = this.pieces.find(x => x.position.file === space.file && x.position.rank === space.rank)!;
+          document.getElementById(original.identifier)!.style.display = 'none';
+        }
         this.pieceInContext.position = space;
         let piece = document.getElementById(this.pieceInContext.identifier)!;
         piece.style.top = `${space.location.y}px`;
@@ -240,31 +244,7 @@ export class BoardComponent implements OnInit {
   onPawnClicked(piece: Piece): void {
     this.clearValidMoveIndicators();
     piece.validMoves = [];
-    if (piece == this.pieceInContext && this.pieceClicked) {
-      this.pieceClicked = false
-      return;
-    }
-    this.pieceClicked = true;
-    this.pieceInContext = piece;
-    // TODO: Make sure that there isn't another piece here
-    // think about captures
-    if (piece.color === 'white') {
-      piece.validMoves.push(this.positions.find(x => x.file === piece.position.file && x.rank === piece.position.rank + 1)!);
-      if (piece.position.rank == 2) {
-        piece.validMoves.push(this.positions.find(x => x.file === piece.position.file && x.rank === piece.position.rank + 2)!);
-      }
-    } else {
-      piece.validMoves.push(this.positions.find(x => x.file === piece.position.file && x.rank === piece.position.rank - 1)!);
-      if (piece.position.rank == 7) {
-        piece.validMoves.push(this.positions.find(x => x.file === piece.position.file && x.rank === piece.position.rank - 2)!);
-      }
-    }
-    this.showValidMoveIndicators(piece.validMoves);
-  }
-
-  onKnightClicked(piece: Piece): void {
-    this.clearValidMoveIndicators();
-    piece.validMoves = [];
+    piece.possibleTakes = [];
     if (piece == this.pieceInContext && this.pieceClicked) {
       this.pieceClicked = false
       return;
@@ -272,38 +252,87 @@ export class BoardComponent implements OnInit {
     this.pieceClicked = true;
     this.pieceInContext = piece;
     let possibleMoves: Position[] = [];
-    // TODO: Make sure that there isn't another piece here
-    // think about captures
-      possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) + 1 && x.rank === piece.position.rank + 2)!);
-      possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) - 1 && x.rank === piece.position.rank + 2)!);
-      possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) - 2 && x.rank === piece.position.rank + 1)!);
-      possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) + 2 && x.rank === piece.position.rank + 1)!);
-      possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) + 1 && x.rank === piece.position.rank - 2)!);
-      possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) - 1 && x.rank === piece.position.rank - 2)!);
-      possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) - 2 && x.rank === piece.position.rank - 1)!);
-      possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) + 2 && x.rank === piece.position.rank - 1)!);
-      possibleMoves.forEach(move => {
-        if (!move) return;
-        if (move.file.charCodeAt(0) >= 'a'.charCodeAt(0) && move.file.charCodeAt(0) <= 'h'.charCodeAt(0) && move.rank >= 1 && move.rank <= 8) {    
-          piece.validMoves.push(move);
+    if (piece.color === 'white') {
+      possibleMoves.push(this.positions.find(x => x.file === piece.position.file && x.rank === piece.position.rank + 1)!);
+      if (piece.position.rank == 2) {
+        possibleMoves.push(this.positions.find(x => x.file === piece.position.file && x.rank === piece.position.rank + 2)!);
+      }
+    } else {
+      possibleMoves.push(this.positions.find(x => x.file === piece.position.file && x.rank === piece.position.rank - 1)!);
+      if (piece.position.rank == 7) {
+        possibleMoves.push(this.positions.find(x => x.file === piece.position.file && x.rank === piece.position.rank - 2)!);
+      }
+    }
+    possibleMoves.forEach(move => {
+      if (move.file.charCodeAt(0) >= 'a'.charCodeAt(0) && move.file.charCodeAt(0) <= 'h'.charCodeAt(0) && move.rank >= 1 && move.rank <= 8) {    
+        piece.validMoves.push(move);
+      }
+      this.pieces.forEach(x => {
+        if (x.position.file === move.file && x.position.rank === move.rank) {
+          piece.validMoves.splice(piece.validMoves.indexOf(x.position));
+        } else if (x.position.rank === move.rank && (x.position.file.charCodeAt(0) === move.file.charCodeAt(0) + 1 || x.position.file.charCodeAt(0) === move.file.charCodeAt(0) - 1)) {
+          piece.possibleTakes.push(x.position);
         }
-        this.pieces.forEach(x => {
-          if (x.position.file === move.file && x.position.rank === move.rank) {
-            // there is a piece on one of the possible moves
-            if (x.color === 'white') {
-              piece.validMoves.splice(piece.validMoves.indexOf(x.position));
-            } else {
-              // capture
-            }
-          }
-        });
       });
+    });
+    if (piece.possibleTakes.length > 0) {
+      this.showPossibleTakeIndicators(piece.possibleTakes);
+    }
     this.showValidMoveIndicators(piece.validMoves);
+    this.removeValidMoveIndicatorsWhenTakeIndicator(piece);
+  }
+
+  onKnightClicked(piece: Piece): void {
+    this.clearValidMoveIndicators();
+    piece.validMoves = [];
+    piece.possibleTakes = [];
+    if (piece == this.pieceInContext && this.pieceClicked) {
+      this.pieceClicked = false
+      return;
+    }
+    this.pieceClicked = true;
+    this.pieceInContext = piece;
+    let possibleMoves: Position[] = [];
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) + 1 && x.rank === piece.position.rank + 2)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) - 1 && x.rank === piece.position.rank + 2)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) - 2 && x.rank === piece.position.rank + 1)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) + 2 && x.rank === piece.position.rank + 1)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) + 1 && x.rank === piece.position.rank - 2)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) - 1 && x.rank === piece.position.rank - 2)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) - 2 && x.rank === piece.position.rank - 1)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === piece.position.file.charCodeAt(0) + 2 && x.rank === piece.position.rank - 1)!);
+    possibleMoves.forEach(move => {
+      if (!move) return;
+      if (move.file.charCodeAt(0) >= 'a'.charCodeAt(0) && move.file.charCodeAt(0) <= 'h'.charCodeAt(0) && move.rank >= 1 && move.rank <= 8) {    
+        piece.validMoves.push(move);
+      }
+      this.pieces.forEach(x => {
+        if (x.position.file === move.file && x.position.rank === move.rank) {
+          if (x.color === piece.color) {
+            piece.validMoves.splice(piece.validMoves.indexOf(x.position));
+          } else {
+            piece.possibleTakes.push(x.position);
+          }
+        }
+      });
+    });
+    if (piece.possibleTakes.length > 0) {
+      this.showPossibleTakeIndicators(piece.possibleTakes);
+    }
+    this.showValidMoveIndicators(piece.validMoves);
+    this.removeValidMoveIndicatorsWhenTakeIndicator(piece);
   }
 
   showValidMoveIndicators(spaces: Position[]): void {
     spaces.forEach(space => {
       let id = `${space.file}${space.rank}-ind`
+      document.getElementById(id)!.style.display = 'block';
+    });
+  }
+
+  showPossibleTakeIndicators(spaces: Position[]): void {
+    spaces.forEach(space => {
+      let id = `${space.file}${space.rank}-capture-ind`
       document.getElementById(id)!.style.display = 'block';
     });
   }
@@ -314,6 +343,17 @@ export class BoardComponent implements OnInit {
       let element = allSpaces[i];
       element.style.display = 'none';
     }
+  }
+
+  removeValidMoveIndicatorsWhenTakeIndicator(piece: Piece): void {
+    piece.validMoves.forEach(validMove => {
+      piece.possibleTakes.forEach(possibleTake => {
+        if (validMove.file === possibleTake.file && validMove.rank === possibleTake.rank) {
+          let id = `${validMove.file}${validMove.rank}-ind`
+          document.getElementById(id)!.style.display = 'none';
+        }
+      });
+    });
   }
 
 }

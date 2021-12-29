@@ -6,6 +6,7 @@ export class Piece {
     validMoves: Position[] = [];
     color: string = '';
     identifier: string = '';
+    possibleTakes: Position[] = [];
 
     constructor();
     constructor(type: string, position: Position, color: string, identifier: string);
