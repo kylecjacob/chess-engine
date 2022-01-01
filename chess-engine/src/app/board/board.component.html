@@ -186,75 +186,75 @@
 
     <!--------------------------------------------------------------------------------------------------------------->
 
-    <div [ngClass]="a1.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(a1)" id="a1"></div>
-    <div [ngClass]="a2.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(a2)" id="a2"></div>
-    <div [ngClass]="a3.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(a3)" id="a3"></div>
-    <div [ngClass]="a4.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(a4)" id="a4"></div>
-    <div [ngClass]="a5.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(a5)" id="a5"></div>
-    <div [ngClass]="a6.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(a6)" id="a6"></div>
-    <div [ngClass]="a7.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(a7)" id="a7"></div>
-    <div [ngClass]="a8.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(a8)" id="a8"></div>
+    <div [ngClass]="a1.hasPiece && a1.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(a1)" id="a1"></div>
+    <div [ngClass]="a2.hasPiece && a2.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(a2)" id="a2"></div>
+    <div [ngClass]="a3.hasPiece && a3.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(a3)" id="a3"></div>
+    <div [ngClass]="a4.hasPiece && a4.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(a4)" id="a4"></div>
+    <div [ngClass]="a5.hasPiece && a5.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(a5)" id="a5"></div>
+    <div [ngClass]="a6.hasPiece && a6.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(a6)" id="a6"></div>
+    <div [ngClass]="a7.hasPiece && a7.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(a7)" id="a7"></div>
+    <div [ngClass]="a8.hasPiece && a8.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(a8)" id="a8"></div>
 
-    <div [ngClass]="b1.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(b1)" id="b1"></div>
-    <div [ngClass]="b2.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(b2)" id="b2"></div>
-    <div [ngClass]="b3.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(b3)" id="b3"></div>
-    <div [ngClass]="b4.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(b4)" id="b4"></div>
-    <div [ngClass]="b5.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(b5)" id="b5"></div>
-    <div [ngClass]="b6.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(b6)" id="b6"></div>
-    <div [ngClass]="b7.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(b7)" id="b7"></div>
-    <div [ngClass]="b8.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(b8)" id="b8"></div>
+    <div [ngClass]="b1.hasPiece && b1.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(b1)" id="b1"></div>
+    <div [ngClass]="b2.hasPiece && b2.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(b2)" id="b2"></div>
+    <div [ngClass]="b3.hasPiece && b3.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(b3)" id="b3"></div>
+    <div [ngClass]="b4.hasPiece && b4.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(b4)" id="b4"></div>
+    <div [ngClass]="b5.hasPiece && b5.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(b5)" id="b5"></div>
+    <div [ngClass]="b6.hasPiece && b6.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(b6)" id="b6"></div>
+    <div [ngClass]="b7.hasPiece && b7.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(b7)" id="b7"></div>
+    <div [ngClass]="b8.hasPiece && b8.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(b8)" id="b8"></div>
 
-    <div [ngClass]="c1.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(c1)" id="c1"></div>
-    <div [ngClass]="c2.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(c2)" id="c2"></div>
-    <div [ngClass]="c3.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(c3)" id="c3"></div>
-    <div [ngClass]="c4.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(c4)" id="c4"></div>
-    <div [ngClass]="c5.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(c5)" id="c5"></div>
-    <div [ngClass]="c6.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(c6)" id="c6"></div>
-    <div [ngClass]="c7.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(c7)" id="c7"></div>
-    <div [ngClass]="c8.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(c8)" id="c8"></div>
+    <div [ngClass]="c1.hasPiece && c1.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(c1)" id="c1"></div>
+    <div [ngClass]="c2.hasPiece && c2.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(c2)" id="c2"></div>
+    <div [ngClass]="c3.hasPiece && c3.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(c3)" id="c3"></div>
+    <div [ngClass]="c4.hasPiece && c4.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(c4)" id="c4"></div>
+    <div [ngClass]="c5.hasPiece && c5.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(c5)" id="c5"></div>
+    <div [ngClass]="c6.hasPiece && c6.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(c6)" id="c6"></div>
+    <div [ngClass]="c7.hasPiece && c7.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(c7)" id="c7"></div>
+    <div [ngClass]="c8.hasPiece && c8.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(c8)" id="c8"></div>
 
-    <div [ngClass]="d1.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(d1)" id="d1"></div>
-    <div [ngClass]="d2.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(d2)" id="d2"></div>
-    <div [ngClass]="d3.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(d3)" id="d3"></div>
-    <div [ngClass]="d4.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(d4)" id="d4"></div>
-    <div [ngClass]="d5.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(d5)" id="d5"></div>
-    <div [ngClass]="d6.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(d6)" id="d6"></div>
-    <div [ngClass]="d7.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(d7)" id="d7"></div>
-    <div [ngClass]="d8.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(d8)" id="d8"></div>
+    <div [ngClass]="d1.hasPiece && d1.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(d1)" id="d1"></div>
+    <div [ngClass]="d2.hasPiece && d2.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(d2)" id="d2"></div>
+    <div [ngClass]="d3.hasPiece && d3.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(d3)" id="d3"></div>
+    <div [ngClass]="d4.hasPiece && d4.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(d4)" id="d4"></div>
+    <div [ngClass]="d5.hasPiece && d5.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(d5)" id="d5"></div>
+    <div [ngClass]="d6.hasPiece && d6.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(d6)" id="d6"></div>
+    <div [ngClass]="d7.hasPiece && d7.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(d7)" id="d7"></div>
+    <div [ngClass]="d8.hasPiece && d8.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(d8)" id="d8"></div>
 
-    <div [ngClass]="e1.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(e1)" id="e1"></div>
-    <div [ngClass]="e2.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(e2)" id="e2"></div>
-    <div [ngClass]="e3.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(e3)" id="e3"></div>
-    <div [ngClass]="e4.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(e4)" id="e4"></div>
-    <div [ngClass]="e5.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(e5)" id="e5"></div>
-    <div [ngClass]="e6.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(e6)" id="e6"></div>
-    <div [ngClass]="e7.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(e7)" id="e7"></div>
-    <div [ngClass]="e8.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(e8)" id="e8"></div>
+    <div [ngClass]="e1.hasPiece && e1.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(e1)" id="e1"></div>
+    <div [ngClass]="e2.hasPiece && e2.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(e2)" id="e2"></div>
+    <div [ngClass]="e3.hasPiece && e3.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(e3)" id="e3"></div>
+    <div [ngClass]="e4.hasPiece && e4.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(e4)" id="e4"></div>
+    <div [ngClass]="e5.hasPiece && e5.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(e5)" id="e5"></div>
+    <div [ngClass]="e6.hasPiece && e6.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(e6)" id="e6"></div>
+    <div [ngClass]="e7.hasPiece && e7.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(e7)" id="e7"></div>
+    <div [ngClass]="e8.hasPiece && e8.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(e8)" id="e8"></div>
 
-    <div [ngClass]="f1.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(f1)" id="f1"></div>
-    <div [ngClass]="f2.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(f2)" id="f2"></div>
-    <div [ngClass]="f3.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(f3)" id="f3"></div>
-    <div [ngClass]="f4.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(f4)" id="f4"></div>
-    <div [ngClass]="f5.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(f5)" id="f5"></div>
-    <div [ngClass]="f6.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(f6)" id="f6"></div>
-    <div [ngClass]="f7.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(f7)" id="f7"></div>
-    <div [ngClass]="f8.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(f8)" id="f8"></div>
+    <div [ngClass]="f1.hasPiece && f1.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(f1)" id="f1"></div>
+    <div [ngClass]="f2.hasPiece && f2.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(f2)" id="f2"></div>
+    <div [ngClass]="f3.hasPiece && f3.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(f3)" id="f3"></div>
+    <div [ngClass]="f4.hasPiece && f4.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(f4)" id="f4"></div>
+    <div [ngClass]="f5.hasPiece && f5.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(f5)" id="f5"></div>
+    <div [ngClass]="f6.hasPiece && f6.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(f6)" id="f6"></div>
+    <div [ngClass]="f7.hasPiece && f7.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(f7)" id="f7"></div>
+    <div [ngClass]="f8.hasPiece && f8.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(f8)" id="f8"></div>
     
-    <div [ngClass]="g1.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(g1)" id="g1"></div>
-    <div [ngClass]="g2.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(g2)" id="g2"></div>
-    <div [ngClass]="g3.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(g3)" id="g3"></div>
-    <div [ngClass]="g4.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(g4)" id="g4"></div>
-    <div [ngClass]="g5.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(g5)" id="g5"></div>
-    <div [ngClass]="g6.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(g6)" id="g6"></div>
-    <div [ngClass]="g7.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(g7)" id="g7"></div>
-    <div [ngClass]="g8.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(g8)" id="g8"></div>
+    <div [ngClass]="g1.hasPiece && g1.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(g1)" id="g1"></div>
+    <div [ngClass]="g2.hasPiece && g2.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(g2)" id="g2"></div>
+    <div [ngClass]="g3.hasPiece && g3.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(g3)" id="g3"></div>
+    <div [ngClass]="g4.hasPiece && g4.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(g4)" id="g4"></div>
+    <div [ngClass]="g5.hasPiece && g5.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(g5)" id="g5"></div>
+    <div [ngClass]="g6.hasPiece && g6.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(g6)" id="g6"></div>
+    <div [ngClass]="g7.hasPiece && g7.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(g7)" id="g7"></div>
+    <div [ngClass]="g8.hasPiece && g8.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(g8)" id="g8"></div>
 
-    <div [ngClass]="h1.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(h1)" id="h1"></div>
-    <div [ngClass]="h2.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(h2)" id="h2"></div>
-    <div [ngClass]="h3.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(h3)" id="h3"></div>
-    <div [ngClass]="h4.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(h4)" id="h4"></div>
-    <div [ngClass]="h5.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(h5)" id="h5"></div>
-    <div [ngClass]="h6.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(h6)" id="h6"></div>
-    <div [ngClass]="h7.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(h7)" id="h7"></div>
-    <div [ngClass]="h8.hasPiece ? 'piece' : 'space'" (click)="onSpaceClicked(h8)" id="h8"></div>
+    <div [ngClass]="h1.hasPiece && h1.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(h1)" id="h1"></div>
+    <div [ngClass]="h2.hasPiece && h2.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(h2)" id="h2"></div>
+    <div [ngClass]="h3.hasPiece && h3.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(h3)" id="h3"></div>
+    <div [ngClass]="h4.hasPiece && h4.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(h4)" id="h4"></div>
+    <div [ngClass]="h5.hasPiece && h5.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(h5)" id="h5"></div>
+    <div [ngClass]="h6.hasPiece && h6.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(h6)" id="h6"></div>
+    <div [ngClass]="h7.hasPiece && h7.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(h7)" id="h7"></div>
+    <div [ngClass]="h8.hasPiece && h8.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(h8)" id="h8"></div>
 </div>

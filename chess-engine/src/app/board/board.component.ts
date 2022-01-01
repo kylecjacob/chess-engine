@@ -69,23 +69,23 @@ export class BoardComponent implements OnInit {
   g6: Position = new Position('g', 6, new Coordinates(271, 780), false);
   h6: Position = new Position('h', 6, new Coordinates(271, 882), false);
 
-  a7: Position = new Position('a', 7, new Coordinates(169, 168), true, new Piece('pawn', 'white', 'a7-pawn'));
-  b7: Position = new Position('b', 7, new Coordinates(169, 270), true, new Piece('pawn', 'white', 'a7-pawn'));
-  c7: Position = new Position('c', 7, new Coordinates(169, 372), true, new Piece('pawn', 'white', 'a7-pawn'));
-  d7: Position = new Position('d', 7, new Coordinates(169, 474), true, new Piece('pawn', 'white', 'a7-pawn'));
-  e7: Position = new Position('e', 7, new Coordinates(169, 576), true, new Piece('pawn', 'white', 'a7-pawn'));
-  f7: Position = new Position('f', 7, new Coordinates(169, 678), true, new Piece('pawn', 'white', 'a7-pawn'));
-  g7: Position = new Position('g', 7, new Coordinates(169, 780), true, new Piece('pawn', 'white', 'a7-pawn'));
-  h7: Position = new Position('h', 7, new Coordinates(169, 882), true, new Piece('pawn', 'white', 'a7-pawn'));
+  a7: Position = new Position('a', 7, new Coordinates(169, 168), true, new Piece('pawn', 'black', 'a7-pawn'));
+  b7: Position = new Position('b', 7, new Coordinates(169, 270), true, new Piece('pawn', 'black', 'b7-pawn'));
+  c7: Position = new Position('c', 7, new Coordinates(169, 372), true, new Piece('pawn', 'black', 'c7-pawn'));
+  d7: Position = new Position('d', 7, new Coordinates(169, 474), true, new Piece('pawn', 'black', 'd7-pawn'));
+  e7: Position = new Position('e', 7, new Coordinates(169, 576), true, new Piece('pawn', 'black', 'e7-pawn'));
+  f7: Position = new Position('f', 7, new Coordinates(169, 678), true, new Piece('pawn', 'black', 'f7-pawn'));
+  g7: Position = new Position('g', 7, new Coordinates(169, 780), true, new Piece('pawn', 'black', 'g7-pawn'));
+  h7: Position = new Position('h', 7, new Coordinates(169, 882), true, new Piece('pawn', 'black', 'h7-pawn'));
 
-  a8: Position = new Position('a', 8, new Coordinates(67, 168), true, new Piece('rook', 'white', 'a8-rook'));
-  b8: Position = new Position('b', 8, new Coordinates(67, 270), true, new Piece('knight', 'white', 'b8-knight'));
-  c8: Position = new Position('c', 8, new Coordinates(67, 372), true, new Piece('bishop', 'white', 'c8-bishop'));
-  d8: Position = new Position('d', 8, new Coordinates(67, 474), true, new Piece('queen', 'white', 'black-queen'));
-  e8: Position = new Position('e', 8, new Coordinates(67, 576), true, new Piece('king', 'white', 'black-king'));
-  f8: Position = new Position('f', 8, new Coordinates(67, 678), true, new Piece('bishop', 'white', 'f8-bishop'));
-  g8: Position = new Position('g', 8, new Coordinates(67, 780), true, new Piece('knight', 'white', 'g8-knight'));
-  h8: Position = new Position('h', 8, new Coordinates(67, 882), true, new Piece('rook', 'white', 'h8-rook'));
+  a8: Position = new Position('a', 8, new Coordinates(67, 168), true, new Piece('rook', 'black', 'a8-rook'));
+  b8: Position = new Position('b', 8, new Coordinates(67, 270), true, new Piece('knight', 'black', 'b8-knight'));
+  c8: Position = new Position('c', 8, new Coordinates(67, 372), true, new Piece('bishop', 'black', 'c8-bishop'));
+  d8: Position = new Position('d', 8, new Coordinates(67, 474), true, new Piece('queen', 'black', 'black-queen'));
+  e8: Position = new Position('e', 8, new Coordinates(67, 576), true, new Piece('king', 'black', 'black-king'));
+  f8: Position = new Position('f', 8, new Coordinates(67, 678), true, new Piece('bishop', 'black', 'f8-bishop'));
+  g8: Position = new Position('g', 8, new Coordinates(67, 780), true, new Piece('knight', 'black', 'g8-knight'));
+  h8: Position = new Position('h', 8, new Coordinates(67, 882), true, new Piece('rook', 'black', 'h8-rook'));
 
   constructor() { }
 
@@ -164,14 +164,25 @@ export class BoardComponent implements OnInit {
   }
 
   onSpaceClicked(space: Position): void {
-    // console.log(space);
-    if (space.hasPiece) {
+    if (space.hasPiece && space.piece.color === 'white') {
       switch (space.piece.type) {
         case 'pawn':
           this.onPawnClicked(space);
           break;
         case 'knight':
           this.onKnightClicked(space);
+          break;
+        case 'rook':
+          this.onRookClicked(space);
+          break;
+        case 'bishop':
+          this.onBishopClicked(space);
+          break;
+        case 'queen':
+          this.onQueenClicked(space);
+          break;
+        case 'king':
+          this.onKingClicked(space);
           break;
       }
     } else if (this.pieceClicked && this.pieceInContext) { // if not then check if there is a piece in context and if it's a valid move
@@ -191,8 +202,6 @@ export class BoardComponent implements OnInit {
         space.hasPiece = true;
       }
     }
-    // console.log(this.pieceClicked);
-    // console.log(this.pieceInContext);
   }
 
   onPawnClicked(space: Position): void {
@@ -229,7 +238,7 @@ export class BoardComponent implements OnInit {
         piece.validMoves.push(move);
       }
       if (move.hasPiece) {
-        if (move.piece.color === piece.color) {
+        if (move.piece.color === piece.color || move.file === space.file) {
           piece.validMoves.splice(piece.validMoves.indexOf(move)); // else if it's black and it's on a diagnal then add it to possile takes
         } else if (move.file.charCodeAt(0) !== space.file.charCodeAt(0)) {
           piece.possibleTakes.push(move);
@@ -238,6 +247,7 @@ export class BoardComponent implements OnInit {
         piece.validMoves.splice(piece.validMoves.indexOf(move));
       }      
     });
+    console.log()
     if (piece.possibleTakes.length > 0) {
       this.showPossibleTakeIndicators(piece.possibleTakes);
     }
@@ -266,6 +276,252 @@ export class BoardComponent implements OnInit {
     possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank - 2)!);
     possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 2 && x.rank === space.rank - 1)!);
     possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 2 && x.rank === space.rank - 1)!);
+    possibleMoves.forEach(move => {
+      if (!move) return;
+      if (move.file.charCodeAt(0) >= 'a'.charCodeAt(0) && move.file.charCodeAt(0) <= 'h'.charCodeAt(0) && move.rank >= 1 && move.rank <= 8) {    
+        piece.validMoves.push(move);
+      }
+      if (move.hasPiece) {
+        if (move.piece.color === piece.color) {
+          piece.validMoves.splice(piece.validMoves.indexOf(move));
+        } else {
+          piece.possibleTakes.push(move);
+        }
+      }
+    });
+    if (piece.possibleTakes.length > 0) {
+      this.showPossibleTakeIndicators(piece.possibleTakes);
+    }
+    this.showValidMoveIndicators(piece.validMoves);
+    this.removeValidMoveIndicatorsWhenTakeIndicator(piece);
+  }
+
+  onRookClicked(space: Position): void {
+    this.clearValidMoveIndicators();
+    let piece: Piece = space.piece;
+    piece.validMoves = [];
+    piece.possibleTakes = [];
+    if (piece == this.pieceInContext && this.pieceClicked) {
+      this.pieceClicked = false
+      return;
+    }
+    this.pieceClicked = true;
+    this.pieceInContext = piece;
+    this.spaceInContext = space;
+    let possibleMoves: Position[] = [];
+    let right: number = 104 - space.file.charCodeAt(0);
+    for (let i = 1; i <= right; i++) {
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + i && x.rank === space.rank)!
+      possibleMoves.push(potentialMove);
+      if (potentialMove.hasPiece) break;
+    }
+    let left: number = space.file.charCodeAt(0) - 97;
+    for (let i = 1; i <= left; i++) {
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - i && x.rank === space.rank)!
+      possibleMoves.push(potentialMove);
+      if (potentialMove.hasPiece) break;
+    }
+    let up: number = 8 - space.rank;
+    for (let i = 1; i <= up; i++) {
+      let potentialMove: Position = this.positions.find(x => x.file === space.file && x.rank === space.rank + i)!;
+      possibleMoves.push(potentialMove);
+      if (potentialMove.hasPiece) break;
+    }
+    let down: number = space.rank - 1;
+    for (let i = 1; i <= down; i++) {
+      let potentialMove: Position = this.positions.find(x => x.file === space.file && x.rank === space.rank - i)!;
+      possibleMoves.push(potentialMove);
+      if (potentialMove.hasPiece) break;
+    }
+    possibleMoves.forEach(move => {
+      if (!move) return;
+      if (move.file.charCodeAt(0) >= 'a'.charCodeAt(0) && move.file.charCodeAt(0) <= 'h'.charCodeAt(0) && move.rank >= 1 && move.rank <= 8) {    
+        piece.validMoves.push(move);
+      }
+      if (move.hasPiece) {
+        if (move.piece.color === piece.color) {
+          piece.validMoves.splice(piece.validMoves.indexOf(move));
+        } else {
+          piece.possibleTakes.push(move);
+        }
+      }
+    });
+    if (piece.possibleTakes.length > 0) {
+      this.showPossibleTakeIndicators(piece.possibleTakes);
+    }
+    this.showValidMoveIndicators(piece.validMoves);
+    this.removeValidMoveIndicatorsWhenTakeIndicator(piece);
+  }
+
+  onBishopClicked(space: Position): void {
+    this.clearValidMoveIndicators();
+    let piece: Piece = space.piece;
+    piece.validMoves = [];
+    piece.possibleTakes = [];
+    if (piece == this.pieceInContext && this.pieceClicked) {
+      this.pieceClicked = false
+      return;
+    }
+    this.pieceClicked = true;
+    this.pieceInContext = piece;
+    this.spaceInContext = space;
+    let possibleMoves: Position[] = [];
+    let right: number = 104 - space.file.charCodeAt(0);
+    for (let i = 1; i <= right; i++) { // upper right
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + i && x.rank === space.rank + i)!
+      if (potentialMove) {
+        possibleMoves.push(potentialMove);
+        if (potentialMove.hasPiece) break;
+      }
+    }
+    for (let i = 1; i <= right; i++) { // lower right
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + i && x.rank === space.rank - i)!
+      if (potentialMove) {
+        possibleMoves.push(potentialMove);
+        if (potentialMove.hasPiece) break;        
+      }
+    }
+    let left: number = space.file.charCodeAt(0) - 97;
+    for (let i = 1; i <= left; i++) { // upper left
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - i && x.rank === space.rank + i)!
+      if (potentialMove) {
+        possibleMoves.push(potentialMove);
+        if (potentialMove.hasPiece) break;
+      }
+    }
+    for (let i = 1; i <= left; i++) { // lower right
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - i && x.rank === space.rank - i)!
+      if (potentialMove) {
+        possibleMoves.push(potentialMove);
+        if (potentialMove.hasPiece) break;
+      }
+    }    
+    possibleMoves.forEach(move => {
+      if (!move) return;
+      if (move.file.charCodeAt(0) >= 'a'.charCodeAt(0) && move.file.charCodeAt(0) <= 'h'.charCodeAt(0) && move.rank >= 1 && move.rank <= 8) {    
+        piece.validMoves.push(move);
+      }
+      if (move.hasPiece) {
+        if (move.piece.color === piece.color) {
+          piece.validMoves.splice(piece.validMoves.indexOf(move));
+        } else {
+          piece.possibleTakes.push(move);
+        }
+      }
+    });
+    if (piece.possibleTakes.length > 0) {
+      this.showPossibleTakeIndicators(piece.possibleTakes);
+    }
+    this.showValidMoveIndicators(piece.validMoves);
+    this.removeValidMoveIndicatorsWhenTakeIndicator(piece);
+  }
+
+  onQueenClicked(space: Position): void {
+    this.clearValidMoveIndicators();
+    let piece: Piece = space.piece;
+    piece.validMoves = [];
+    piece.possibleTakes = [];
+    if (piece == this.pieceInContext && this.pieceClicked) {
+      this.pieceClicked = false
+      return;
+    }
+    this.pieceClicked = true;
+    this.pieceInContext = piece;
+    this.spaceInContext = space;
+    let possibleMoves: Position[] = [];
+    let right: number = 104 - space.file.charCodeAt(0);
+    for (let i = 1; i <= right; i++) { // upper right
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + i && x.rank === space.rank + i)!
+      if (potentialMove) {
+        possibleMoves.push(potentialMove);
+        if (potentialMove.hasPiece) break;
+      }
+    }
+    for (let i = 1; i <= right; i++) { // lower right
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + i && x.rank === space.rank - i)!
+      if (potentialMove) {
+        possibleMoves.push(potentialMove);
+        if (potentialMove.hasPiece) break;        
+      }
+    }
+    let left: number = space.file.charCodeAt(0) - 97;
+    for (let i = 1; i <= left; i++) { // upper left
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - i && x.rank === space.rank + i)!
+      if (potentialMove) {
+        possibleMoves.push(potentialMove);
+        if (potentialMove.hasPiece) break;
+      }
+    }
+    for (let i = 1; i <= left; i++) { // lower right
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - i && x.rank === space.rank - i)!
+      if (potentialMove) {
+        possibleMoves.push(potentialMove);
+        if (potentialMove.hasPiece) break;
+      }
+    }
+    for (let i = 1; i <= right; i++) {
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + i && x.rank === space.rank)!
+      possibleMoves.push(potentialMove);
+      if (potentialMove.hasPiece) break;
+    }
+    for (let i = 1; i <= left; i++) {
+      let potentialMove: Position = this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - i && x.rank === space.rank)!
+      possibleMoves.push(potentialMove);
+      if (potentialMove.hasPiece) break;
+    }
+    let up: number = 8 - space.rank;
+    for (let i = 1; i <= up; i++) {
+      let potentialMove: Position = this.positions.find(x => x.file === space.file && x.rank === space.rank + i)!;
+      possibleMoves.push(potentialMove);
+      if (potentialMove.hasPiece) break;
+    }
+    let down: number = space.rank - 1;
+    for (let i = 1; i <= down; i++) {
+      let potentialMove: Position = this.positions.find(x => x.file === space.file && x.rank === space.rank - i)!;
+      possibleMoves.push(potentialMove);
+      if (potentialMove.hasPiece) break;
+    }
+    possibleMoves.forEach(move => {
+      if (!move) return;
+      if (move.file.charCodeAt(0) >= 'a'.charCodeAt(0) && move.file.charCodeAt(0) <= 'h'.charCodeAt(0) && move.rank >= 1 && move.rank <= 8) {    
+        piece.validMoves.push(move);
+      }
+      if (move.hasPiece) {
+        if (move.piece.color === piece.color) {
+          piece.validMoves.splice(piece.validMoves.indexOf(move));
+        } else {
+          piece.possibleTakes.push(move);
+        }
+      }
+    });
+    if (piece.possibleTakes.length > 0) {
+      this.showPossibleTakeIndicators(piece.possibleTakes);
+    }
+    this.showValidMoveIndicators(piece.validMoves);
+    this.removeValidMoveIndicatorsWhenTakeIndicator(piece);
+  }
+
+  onKingClicked(space: Position): void {
+    this.clearValidMoveIndicators();
+    let piece: Piece = space.piece;
+    piece.validMoves = [];
+    piece.possibleTakes = [];
+    if (piece == this.pieceInContext && this.pieceClicked) {
+      this.pieceClicked = false
+      return;
+    }
+    this.pieceClicked = true;
+    this.pieceInContext = piece;
+    this.spaceInContext = space;
+    let possibleMoves: Position[] = [];
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) && x.rank === space.rank + 1)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) && x.rank === space.rank - 1)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank + 1)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank - 1)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank + 1)!);
+    possibleMoves.push(this.positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank - 1)!);
     possibleMoves.forEach(move => {
       if (!move) return;
       if (move.file.charCodeAt(0) >= 'a'.charCodeAt(0) && move.file.charCodeAt(0) <= 'h'.charCodeAt(0) && move.rank >= 1 && move.rank <= 8) {    
