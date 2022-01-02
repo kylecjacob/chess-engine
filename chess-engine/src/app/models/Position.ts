@@ -6,7 +6,7 @@ export class Position {
     file: string = '';
     location: Coordinates = new Coordinates();
     hasPiece: boolean = false;
-    piece: Piece = new Piece();
+    piece: Piece;
 
     constructor();
     constructor(file: string, rank: number, location: Coordinates, hasPiece: boolean, piece: Piece)
