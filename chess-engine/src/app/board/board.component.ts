@@ -178,15 +178,23 @@ export class BoardComponent implements OnInit {
           let original: Piece = space.piece;
           document.getElementById(original.identifier)!.style.display = 'none';
         }
-        this.spaceInContext.hasPiece = false;
-        this.spaceInContext = space;
-        space.piece = this.pieceInContext;
-        let piece = document.getElementById(this.pieceInContext.identifier)!;
-        piece.style.top = `${space.location.y}px`;
-        piece.style.left = `${space.location.x}px`;
+        if (this.pieceInContext.type === 'king') {
+          let moveDistance: number = space.file.charCodeAt(0) - this.spaceInContext.file.charCodeAt(0);
+          if (moveDistance === 2) { // King side castle 
+            let h1: Position = this.positions.find(x => x.file === 'h' && x.rank === 1)!;
+            let f1: Position = this.positions.find(x => x.file === 'f' && x.rank === 1)!;
+            this.movePiece(h1, f1);
+          } else if (moveDistance === -2) { // Queen side castle 
+            let a1: Position = this.positions.find(x => x.file === 'a' && x.rank === 1)!;
+            let d1: Position = this.positions.find(x => x.file === 'd' && x.rank === 1)!;
+            this.movePiece(a1, d1);
+          }
+        } else if (this.pieceInContext.type === 'pawn' && space.rank === 8) {
+          console.log('pawn promotion');
+        }
+        this.movePiece(this.spaceInContext, space);
         this.clearValidMoveIndicators();
         this.pieceClicked = false;
-        space.hasPiece = true;
       }
     }
   }
@@ -214,5 +222,15 @@ export class BoardComponent implements OnInit {
       let element = allSpaces[i];
       element.style.display = 'none';
     }
+  }
+
+  movePiece(origin: Position, destination: Position): void {
+    let originDomElement = document.getElementById(origin.piece.identifier)!;
+    originDomElement.style.top = `${destination.location.y}px`;
+    originDomElement.style.left = `${destination.location.x}px`;
+    origin.piece.touched = true;
+    destination.piece = origin.piece;
+    destination.hasPiece = true;
+    origin.hasPiece = false;
   }
 }

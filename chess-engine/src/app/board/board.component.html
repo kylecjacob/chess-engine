@@ -93,22 +93,22 @@
     <img id="f1-bishop" src="../../assets/images/white_bishop.png" alt="bishop">
     <img id="white-queen" src="../../assets/images/white_queen.png" alt="queen">
     <img id="white-king" src="../../assets/images/white_king.png" alt="king">
-    <img class="black-piece" id="a7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="black-piece" id="b7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="black-piece" id="c7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="black-piece" id="d7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="black-piece" id="e7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="black-piece" id="f7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="black-piece" id="g7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="black-piece" id="h7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
-    <img class="black-piece" id="a8-rook" src="../../assets/images/black_rook.png" alt="rook">
-    <img class="black-piece" id="h8-rook" src="../../assets/images/black_rook.png" alt="rook">
-    <img class="black-piece" id="b8-knight" src="../../assets/images/black_knight.png" alt="knight">
-    <img class="black-piece" id="g8-knight" src="../../assets/images/black_knight.png" alt="knight">
-    <img class="black-piece" id="c8-bishop" src="../../assets/images/black_bishop.png" alt="bishop">
-    <img class="black-piece" id="f8-bishop" src="../../assets/images/black_bishop.png" alt="bishop">
-    <img class="black-piece" id="black-queen" src="../../assets/images/black_queen.png" alt="queen">
-    <img class="black-piece" id="black-king" src="../../assets/images/black_king.png" alt="king">
+    <img id="a7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="b7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="c7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="d7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="e7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="f7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="g7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="h7-pawn" src="../../assets/images/black_pawn.png" alt="pawn">
+    <img id="a8-rook" src="../../assets/images/black_rook.png" alt="rook">
+    <img id="h8-rook" src="../../assets/images/black_rook.png" alt="rook">
+    <img id="b8-knight" src="../../assets/images/black_knight.png" alt="knight">
+    <img id="g8-knight" src="../../assets/images/black_knight.png" alt="knight">
+    <img id="c8-bishop" src="../../assets/images/black_bishop.png" alt="bishop">
+    <img id="f8-bishop" src="../../assets/images/black_bishop.png" alt="bishop">
+    <img id="black-queen" src="../../assets/images/black_queen.png" alt="queen">
+    <img id="black-king" src="../../assets/images/black_king.png" alt="king">
 
     <!--------------------------------------------------------------------------------------------------------------->
 
@@ -257,4 +257,13 @@
     <div [ngClass]="h6.hasPiece && h6.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(h6)" id="h6"></div>
     <div [ngClass]="h7.hasPiece && h7.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(h7)" id="h7"></div>
     <div [ngClass]="h8.hasPiece && h8.piece.color === 'white' ? 'piece' : 'space'" (click)="onSpaceClicked(h8)" id="h8"></div>
+
+    <!--------------------------------------------------------------------------------------------------------------->
+
+    <div class="pawn-promotion-container">
+        <img class="pawn-promotion" id="queen-promotion" src="../../assets/images/white_queen.png" alt="queen">
+        <img class="pawn-promotion" id="rook-promotion" src="../../assets/images/white_rook.png" alt="rook">
+        <img class="pawn-promotion" id="bishop-promotion" src="../../assets/images/white_bishop.png" alt="bishop">
+        <img class="pawn-promotion" id="knight-promotion" src="../../assets/images/white_knight.png" alt="knight">
+    </div>
 </div>

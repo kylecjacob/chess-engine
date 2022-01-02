@@ -6,7 +6,7 @@ export class Pawn extends Piece {
         this.possibleMoves.push(positions.find(x => x.file === space.file && x.rank === space.rank + 1)!);
         this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank + 1)!);
         this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank + 1)!);
-        if (space.rank == 2) {
+        if (space.rank == 2 && !positions.find(x => x.file === space.file && x.rank === space.rank + 1)!.hasPiece) {
             this.possibleMoves.push(positions.find(x => x.file === space.file && x.rank === space.rank + 2)!);
         }
         this.possibleMoves.forEach(move => {

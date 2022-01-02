@@ -7,6 +7,7 @@ export abstract class Piece {
     identifier: string = '';
     possibleTakes: Position[] = [];
     possibleMoves: Position[] = [];
+    touched: boolean = false;
 
     constructor();
     constructor(type: string, color: string, identifier: string);
