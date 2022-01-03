@@ -20,6 +20,7 @@ export class BoardComponent implements OnInit {
   pieces: Piece[] = [];
   positions: Position[] = [];
   spaceInContext: Position = new Position();
+  promotionSpaceInContext: Position = new Position();
 
   a1: Position = new Position('a', 1, new Coordinates(781, 168), true, new Rook('rook', 'white', 'a1-rook'));
   b1: Position = new Position('b', 1, new Coordinates(781, 270), true, new Knight('knight', 'white', 'b1-knight'));
@@ -174,6 +175,10 @@ export class BoardComponent implements OnInit {
       this.onPieceClicked(space);
     } else if (this.pieceClicked && this.pieceInContext) { // if not then check if there is a piece in context and if it's a valid move
       if (this.pieceInContext.validMoves.includes(space)) {
+        if (this.pieceInContext.type === 'pawn' && space.rank === 8) {        
+          this.showPawnPromotionDisplay(this.spaceInContext, space);
+          return;
+        }
         if (this.pieceInContext.possibleTakes.includes(space)) {
           let original: Piece = space.piece;
           document.getElementById(original.identifier)!.style.display = 'none';
@@ -189,8 +194,6 @@ export class BoardComponent implements OnInit {
             let d1: Position = this.positions.find(x => x.file === 'd' && x.rank === 1)!;
             this.movePiece(a1, d1);
           }
-        } else if (this.pieceInContext.type === 'pawn' && space.rank === 8) {
-          console.log('pawn promotion');
         }
         this.movePiece(this.spaceInContext, space);
         this.clearValidMoveIndicators();
@@ -201,6 +204,7 @@ export class BoardComponent implements OnInit {
 
   onPieceClicked(space: Position): void {
     this.clearValidMoveIndicators();
+    this.hidePawnPromotionDisplay();
     let piece: Piece = space.piece;
     piece.validMoves = [];
     piece.possibleTakes = [];
@@ -214,6 +218,40 @@ export class BoardComponent implements OnInit {
     this.spaceInContext = space;
     piece.getMoves(this.positions, space);
     piece.showIndicators();
+  }
+
+  onPromotionPieceClicked(type: string): void {
+    this.clearValidMoveIndicators();
+    this.hidePawnPromotionDisplay();
+    let file: string = this.promotionSpaceInContext.file;
+    let rank: number = this.promotionSpaceInContext.rank;
+    let piece: Piece;
+    if (this.promotionSpaceInContext.hasPiece) {
+      let originalPiece = document.getElementById(this.promotionSpaceInContext.piece.identifier)!;
+      originalPiece.style.display = 'none';
+    }
+    switch (type) {
+      case 'queen':
+        piece = new Queen('queen', 'white', `${file}${rank}-queen`);
+        break;
+      case 'rook':
+        piece = new Rook('rook', 'white', `${file}${rank}-rook`);
+        break;
+      case 'knight':
+        piece = new Knight('knight', 'white', `${file}${rank}-knight`);
+        break;
+      case 'bishop':
+        piece = new Bishop('bishop', 'white', `${file}${rank}-bishop`);
+        break;
+    }
+    // console.log(piece);
+    let space = this.positions.find(x => x.file === file && x.rank === rank)!;
+    space.piece = piece!;
+    space.hasPiece = true;
+    this.movePiece(this.spaceInContext, space);
+    let domElement = document.getElementById(this.spaceInContext.piece.identifier)! as HTMLImageElement;
+    domElement.src = `../../assets/images/white_${type}.png`;
+    this.pieceClicked = false;
   }
 
   clearValidMoveIndicators(): void {
@@ -232,5 +270,21 @@ export class BoardComponent implements OnInit {
     destination.piece = origin.piece;
     destination.hasPiece = true;
     origin.hasPiece = false;
+  }
+
+  showPawnPromotionDisplay(spaceInContext: Position, spaceClicked: Position): void {
+    this.promotionSpaceInContext = spaceClicked;
+    let display = document.getElementById('pawn-promotion-container')!;
+    display.style.display = 'block';
+    if (spaceClicked.file.charCodeAt(0) < spaceInContext.file.charCodeAt(0)) {
+      display.style.left = `${spaceClicked.location.x - 214}px`;
+    } else {
+      display.style.left = `${spaceClicked.location.x + 95}px`;
+    }
+  }
+
+  hidePawnPromotionDisplay(): void {
+    let display = document.getElementById('pawn-promotion-container')!;
+    display.style.display = 'none';
   }
 }

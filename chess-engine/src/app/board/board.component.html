@@ -260,10 +260,10 @@
 
     <!--------------------------------------------------------------------------------------------------------------->
 
-    <div class="pawn-promotion-container">
-        <img class="pawn-promotion" id="queen-promotion" src="../../assets/images/white_queen.png" alt="queen">
-        <img class="pawn-promotion" id="rook-promotion" src="../../assets/images/white_rook.png" alt="rook">
-        <img class="pawn-promotion" id="bishop-promotion" src="../../assets/images/white_bishop.png" alt="bishop">
-        <img class="pawn-promotion" id="knight-promotion" src="../../assets/images/white_knight.png" alt="knight">
+    <div id="pawn-promotion-container">
+        <img class="piece" id="queen-promotion" (click)="onPromotionPieceClicked('queen')" src="../../assets/images/white_queen.png" alt="queen">
+        <img class="piece" id="rook-promotion" (click)="onPromotionPieceClicked('rook')" src="../../assets/images/white_rook.png" alt="rook">
+        <img class="piece" id="bishop-promotion" (click)="onPromotionPieceClicked('bishop')" src="../../assets/images/white_bishop.png" alt="bishop">
+        <img class="piece" id="knight-promotion" (click)="onPromotionPieceClicked('knight')" src="../../assets/images/white_knight.png" alt="knight">
     </div>
 </div>
