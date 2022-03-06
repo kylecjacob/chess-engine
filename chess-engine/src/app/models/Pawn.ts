@@ -3,11 +3,20 @@ import { Position } from './Position';
 
 export class Pawn extends Piece {
     getMoves(positions: Position[], space: Position): void {
-        this.possibleMoves.push(positions.find(x => x.file === space.file && x.rank === space.rank + 1)!);
-        this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank + 1)!);
-        this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank + 1)!);
-        if (space.rank == 2 && !positions.find(x => x.file === space.file && x.rank === space.rank + 1)!.hasPiece) {
-            this.possibleMoves.push(positions.find(x => x.file === space.file && x.rank === space.rank + 2)!);
+        if (this.color === 'white') {
+            this.possibleMoves.push(positions.find(x => x.file === space.file && x.rank === space.rank + 1)!);
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank + 1)!);
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank + 1)!);
+            if (space.rank == 2 && !positions.find(x => x.file === space.file && x.rank === space.rank + 1)!.hasPiece) {
+                this.possibleMoves.push(positions.find(x => x.file === space.file && x.rank === space.rank + 2)!);
+            }
+        } else {
+            this.possibleMoves.push(positions.find(x => x.file === space.file && x.rank === space.rank - 1)!);
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank - 1)!);
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank - 1)!);
+            if (space.rank == 7 && !positions.find(x => x.file === space.file && x.rank === space.rank - 1)!.hasPiece) {
+                this.possibleMoves.push(positions.find(x => x.file === space.file && x.rank === space.rank - 2)!);
+            }
         }
         this.possibleMoves.forEach(move => {
             if (!move) return;
