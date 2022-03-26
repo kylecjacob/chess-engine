@@ -8,6 +8,8 @@ import { Bishop } from '../models/Bishop';
 import { Queen } from '../models/Queen';
 import { Board } from '../models/Board';
 import { v4 as uuidv4 } from 'uuid';
+import { HttpClient } from '@angular/common/http';
+import { Game } from '../models/Game';
 
 @Component({
   selector: 'app-board',
@@ -23,17 +25,32 @@ export class BoardComponent implements OnInit {
   promotionSpaceInContext: Position = new Position();
   board: Board = new Board();
   turn: string = '';
+  baseUrl: string = 'http://localhost:8000';
+  game!: Game;
 
-  constructor() {    
-    if (localStorage.getItem('gameId') !== null) {
+  constructor(private http: HttpClient) {
+    let gameId = localStorage.getItem('gameId');
+    if (gameId !== null) {
+      console.log('there is already a game in context');
       // show the popup that says 'You have a game in session, would you like to continue?'
       // pull the game from the DB
+      http.get<Game>(this.baseUrl + `/api/game/${gameId}`).subscribe(game => {
+        console.log(game);
+        this.game = game;
+        this.board = game.board;
+      });
       // set the turn to correct player
-      // set the time to where it left off 
+      // set the time to where it left off
     } else {
+      console.log('new game');
       this.board = new Board();
+      let _id: string = uuidv4();
+      this.game = new Game(this.board, _id);
       // this.turn = 'white'; // TODO: add color choice
-      localStorage.setItem('gameId', uuidv4());
+      localStorage.setItem('gameId', _id);
+      http.post<Game>(this.baseUrl + '/api/new-game', this.game).subscribe(game => {
+        console.log(game);
+      });
     }
     // create a board object which has positions array
     // is there a game in session? if so create the board from the gme, otherwise create new game
@@ -41,13 +58,13 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  onSpaceClicked(spaceStr: string): void {
+  async onSpaceClicked(spaceStr: string): Promise<void> {
     let space: Position = this.getPosition(spaceStr);
     if (space.hasPiece && space.piece.color === 'white') {
       this.onPieceClicked(space);
     } else if (this.pieceClicked && this.pieceInContext) { // if not then check if there is a piece in context and if it's a valid move
       if (this.pieceInContext.validMoves.includes(space)) {
-        if (this.pieceInContext.type === 'pawn' && space.rank === 8) {        
+        if (this.pieceInContext.type === 'pawn' && space.rank === 8) {
           return this.showPawnPromotionDisplay(this.spaceInContext, space);
         }
         if (this.pieceInContext.possibleTakes.includes(space)) {
@@ -69,7 +86,10 @@ export class BoardComponent implements OnInit {
         this.movePiece(this.spaceInContext, space);
         this.clearValidMoveIndicators();
         this.pieceClicked = false;
-        this.generateCpuMove();
+        await this.generateCpuMove();
+        this.http.put<Game>(this.baseUrl + `/api/game/${this.game._id}`, this.game).subscribe(game => {
+          console.log(game);
+        });
       }
     }
   }
