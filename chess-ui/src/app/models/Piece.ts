@@ -10,11 +10,22 @@ export abstract class Piece {
     touched: boolean = false;
 
     constructor();
-    constructor(type: string, color: string, identifier: string);
-    constructor(type?: string, color?: string, identifier?: string) {
-        this.type = type!;
-        this.color = color!;
-        this.identifier = identifier!;
+    constructor(type: string, color: string, identifier: string, validMoves?: Position[], touched?: boolean, possibleMoves?: Position[], possibleTakes?: Position[]);
+    constructor(
+        type?: string,
+        color?: string,
+        identifier?: string,
+        validMoves?: Position[],
+        touched?: boolean,
+        possibleMoves?: Position[],
+        possibleTakes?: Position[]) {
+            this.type = type!;
+            this.color = color!;
+            this.identifier = identifier!;
+            this.validMoves = validMoves ?? [];
+            this.touched = touched ?? false;
+            this.possibleMoves = possibleMoves ?? [];
+            this.possibleTakes = possibleTakes ?? [];
     }
 
     abstract getMoves(positions: Position[], space: Position): void;

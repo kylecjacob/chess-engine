@@ -14,7 +14,7 @@ const GameSchema = mongoose.Schema({
                     type: String,
                     validMoves: [],
                     color: String,
-                    identifer: String,
+                    identifier: String,
                     possibleTakes: [],
                     possibleMoves: [],
                     touched: Boolean

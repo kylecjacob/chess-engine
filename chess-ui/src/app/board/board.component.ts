@@ -22,43 +22,45 @@ export class BoardComponent implements OnInit {
   pieces: Piece[] = [];
   positions: Position[] = [];
   spaceInContext: Position = new Position();
-  promotionSpaceInContext: Position = new Position();
-  board: Board = new Board();
+  promotionSpaceInContext: Position = new Position();  
   turn: string = '';
   baseUrl: string = 'http://localhost:8000';
-  game!: Game;
+  game: Game = new Game(new Board(), '');
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) { }
+
+  async ngOnInit(): Promise<void> {
+    // localStorage.removeItem('gameId');
     let gameId = localStorage.getItem('gameId');
     if (gameId !== null) {
       console.log('there is already a game in context');
       // show the popup that says 'You have a game in session, would you like to continue?'
       // pull the game from the DB
-      http.get<Game>(this.baseUrl + `/api/game/${gameId}`).subscribe(game => {
-        console.log(game);
-        this.game = game;
-        this.board = game.board;
+      await this.http.get<Game>(this.baseUrl + `/api/game/${gameId}`).subscribe(game => {
+        console.log('game:', game);
+        this.game = new Game(new Board(game.board), game._id);
+        console.log('board', this.board);
       });
+      // console.log('board:', this.board);
       // set the turn to correct player
       // set the time to where it left off
     } else {
       console.log('new game');
-      this.board = new Board();
       let _id: string = uuidv4();
-      this.game = new Game(this.board, _id);
+      this.game = new Game(new Board(), _id);
       // this.turn = 'white'; // TODO: add color choice
       localStorage.setItem('gameId', _id);
-      http.post<Game>(this.baseUrl + '/api/new-game', this.game).subscribe(game => {
+      await this.http.post<Game>(this.baseUrl + '/api/new-game', this.game).subscribe(game => {
         console.log(game);
       });
     }
+    // console.log(this.board);
     // create a board object which has positions array
     // is there a game in session? if so create the board from the gme, otherwise create new game
   }
 
-  ngOnInit(): void { }
-
   async onSpaceClicked(spaceStr: string): Promise<void> {
+    console.log(this.board);
     let space: Position = this.getPosition(spaceStr);
     if (space.hasPiece && space.piece.color === 'white') {
       this.onPieceClicked(space);
@@ -86,9 +88,10 @@ export class BoardComponent implements OnInit {
         this.movePiece(this.spaceInContext, space);
         this.clearValidMoveIndicators();
         this.pieceClicked = false;
-        await this.generateCpuMove();
-        this.http.put<Game>(this.baseUrl + `/api/game/${this.game._id}`, this.game).subscribe(game => {
-          console.log(game);
+        // await this.generateCpuMove();
+        console.log(this.board);
+        await this.http.put<Game>(this.baseUrl + `/api/game/${this.game._id}`, this.game).subscribe(game => {
+          // console.log('game returned from db', game.board);
         });
       }
     }
@@ -223,8 +226,7 @@ export class BoardComponent implements OnInit {
     return this.board.getPosition(space[0], parseInt(space[1]));
   }
 
-  onNewGameClicked() {
-    this.board = new Board();
-
+  get board(): Board {
+    return this.game?.board;
   }
 }
