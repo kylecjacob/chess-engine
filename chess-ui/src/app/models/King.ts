@@ -3,14 +3,30 @@ import { Position } from './Position';
 
 export class King extends Piece {
     getMoves(positions: Position[], space: Position): void {
-        this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) && x.rank === space.rank + 1)!);
-        this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) && x.rank === space.rank - 1)!);
-        this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank)!);
-        this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank)!);
-        this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank + 1)!);
-        this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank - 1)!);
-        this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank + 1)!);
-        this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank - 1)!);
+        if (positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) && x.rank === space.rank + 1)) {
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) && x.rank === space.rank + 1)!.toString());        
+        }
+        if (positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) && x.rank === space.rank - 1)) {
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) && x.rank === space.rank - 1)!.toString());
+        }
+        if (positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank)) {
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank)!.toString());            
+        }
+        if (positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank)) {
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank)!.toString());
+        }
+        if (positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank + 1)) {
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank + 1)!.toString());            
+        }
+        if (positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank - 1)) {
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) + 1 && x.rank === space.rank - 1)!.toString());
+        }
+        if (positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank + 1)) {
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank + 1)!.toString());
+        }
+        if (positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank - 1)) {
+            this.possibleMoves.push(positions.find(x => x.file.charCodeAt(0) === space.file.charCodeAt(0) - 1 && x.rank === space.rank - 1)!.toString());            
+        }
         
         // King side castle
         let h1Rook = positions.find(x => x.file === 'h' && x.rank === 1)!;
@@ -18,7 +34,7 @@ export class King extends Piece {
             let move1: Position = positions.find(x => x.file === 'f' && x.rank === 1)!;
             let move2: Position = positions.find(x => x.file === 'g' && x.rank === 1)!;
             if (!move1.hasPiece && !move2.hasPiece) {
-                this.possibleMoves.push(move2);
+                this.possibleMoves.push(move2.toString());
             }
         }
         // Queen side castle 
@@ -27,9 +43,9 @@ export class King extends Piece {
             let move1: Position = positions.find(x => x.file === 'd' && x.rank === 1)!;
             let move2: Position = positions.find(x => x.file === 'c' && x.rank === 1)!;
             if (!move1.hasPiece && !move2.hasPiece) {
-                this.possibleMoves.push(move2);
+                this.possibleMoves.push(move2.toString());
             }
         }
-        this.setMoves();
+        this.setMoves(positions);
     }
 }

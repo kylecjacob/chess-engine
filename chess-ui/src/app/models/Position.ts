@@ -18,4 +18,8 @@ export class Position {
         this.hasPiece = hasPiece!;
         this.piece = piece!;
     }
+
+    toString(): string {
+        return `${this.file}${this.rank}`;
+    }
 }

@@ -14,7 +14,7 @@ export class Board {
     constructor(board?: Board) {
         if (board) {
             board.positions.forEach((pos: Position) => {
-                this.positions.push(new Position(pos.file, pos.rank, new Coordinates(pos.location.y, pos.location.x), pos.hasPiece, this.initializePiece(pos)));
+                this.positions.push(new Position(pos.file, pos.rank, new Coordinates(pos.location.y, pos.location.x), pos.hasPiece, this.initializePiece(pos)!));
             });
         } else {
             this.positions.push(new Position('a', 1, new Coordinates(781, 168), true, new Rook('rook', 'white', 'a1-rook')));
@@ -105,22 +105,33 @@ export class Board {
         });
     }
 
-    initializePiece(pos: Position): Piece {
-        switch (pos.piece.type) {
-            case 'pawn':
-                return new Pawn(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
-            case 'knight':
-                return new Knight(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
-            case 'rook':
-                return new Rook(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
-            case 'bishop':
-                return new Bishop(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
-            case 'queen':
-                return new Queen(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
-            case 'king':
-                return new King(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
-            default:
-                return new Pawn();
+    initializePiece(pos: Position): Piece | undefined {
+        if (pos.hasPiece) {
+            switch (pos.piece.type) {
+                case 'pawn':
+                    return new Pawn(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
+                case 'knight':
+                    return new Knight(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
+                case 'rook':
+                    return new Rook(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
+                case 'bishop':
+                    return new Bishop(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
+                case 'queen':
+                    return new Queen(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
+                case 'king':
+                    return new King(pos.piece.type, pos.piece.color, pos.piece.identifier, pos.piece.validMoves, pos.piece.touched, pos.piece.possibleMoves, pos.piece.possibleTakes);
+            }
         }
+        return undefined;
+    }
+
+    initializePieces(): void {
+        this.positions.forEach(position => {
+            if (position.hasPiece) {
+                let elem: HTMLElement = document.getElementById(position.piece.identifier)!;
+                elem.style.top = `${position.location.y}px`;
+                elem.style.left = `${position.location.x}px`;
+            }
+        })
     }
 }

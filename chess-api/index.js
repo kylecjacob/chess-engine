@@ -34,9 +34,8 @@ app.get('/api/game/:id', async (req, res) => {
 });
 
 app.put('/api/game/:id', async (req, res) => {
-    const result = await Game.findByIdAndUpdate(req.params.id, req.body);
+    const result = await Game.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!result) {
-        // console.log(result);
         res.status(400).json('Game not found');
     } else {
         res.send(result);

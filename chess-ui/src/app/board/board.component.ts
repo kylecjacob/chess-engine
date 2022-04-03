@@ -8,8 +8,8 @@ import { Bishop } from '../models/Bishop';
 import { Queen } from '../models/Queen';
 import { Board } from '../models/Board';
 import { v4 as uuidv4 } from 'uuid';
-import { HttpClient } from '@angular/common/http';
 import { Game } from '../models/Game';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-board',
@@ -23,40 +23,27 @@ export class BoardComponent implements OnInit {
   positions: Position[] = [];
   spaceInContext: Position = new Position();
   promotionSpaceInContext: Position = new Position();  
-  turn: string = '';
-  baseUrl: string = 'http://localhost:8000';
+  turn: string = '';  
   game: Game = new Game(new Board(), '');
 
-  constructor(private http: HttpClient) { }
+  constructor(private gameService: GameService) { }
 
   async ngOnInit(): Promise<void> {
-    // localStorage.removeItem('gameId');
     let gameId = localStorage.getItem('gameId');
     if (gameId !== null) {
       console.log('there is already a game in context');
       // show the popup that says 'You have a game in session, would you like to continue?'
-      // pull the game from the DB
-      await this.http.get<Game>(this.baseUrl + `/api/game/${gameId}`).subscribe(game => {
-        console.log('game:', game);
+      this.gameService.getGame(gameId).subscribe(game => {
         this.game = new Game(new Board(game.board), game._id);
-        console.log('board', this.board);
+        this.board.initializePieces();
       });
-      // console.log('board:', this.board);
-      // set the turn to correct player
-      // set the time to where it left off
     } else {
       console.log('new game');
       let _id: string = uuidv4();
       this.game = new Game(new Board(), _id);
-      // this.turn = 'white'; // TODO: add color choice
       localStorage.setItem('gameId', _id);
-      await this.http.post<Game>(this.baseUrl + '/api/new-game', this.game).subscribe(game => {
-        console.log(game);
-      });
+      this.gameService.addNewGame(this.game).subscribe();
     }
-    // console.log(this.board);
-    // create a board object which has positions array
-    // is there a game in session? if so create the board from the gme, otherwise create new game
   }
 
   async onSpaceClicked(spaceStr: string): Promise<void> {
@@ -65,11 +52,11 @@ export class BoardComponent implements OnInit {
     if (space.hasPiece && space.piece.color === 'white') {
       this.onPieceClicked(space);
     } else if (this.pieceClicked && this.pieceInContext) { // if not then check if there is a piece in context and if it's a valid move
-      if (this.pieceInContext.validMoves.includes(space)) {
+      if (this.pieceInContext.validMoves.includes(spaceStr)) {
         if (this.pieceInContext.type === 'pawn' && space.rank === 8) {
           return this.showPawnPromotionDisplay(this.spaceInContext, space);
         }
-        if (this.pieceInContext.possibleTakes.includes(space)) {
+        if (this.pieceInContext.possibleTakes.includes(spaceStr)) {
           let original: Piece = space.piece;
           document.getElementById(original.identifier)!.style.display = 'none';
         }
@@ -88,11 +75,8 @@ export class BoardComponent implements OnInit {
         this.movePiece(this.spaceInContext, space);
         this.clearValidMoveIndicators();
         this.pieceClicked = false;
-        // await this.generateCpuMove();
-        console.log(this.board);
-        await this.http.put<Game>(this.baseUrl + `/api/game/${this.game._id}`, this.game).subscribe(game => {
-          // console.log('game returned from db', game.board);
-        });
+        await this.generateCpuMove();
+        this.gameService.updateGame(this.game._id, this.game).subscribe();
       }
     }
   }
@@ -105,20 +89,21 @@ export class BoardComponent implements OnInit {
     let i: number = 0;
     for (let position of positionsWithMove) {      
       if (i === randomPosition) {
-        let move: Position = new Position(); 
+        let move: string = '';
         let randomMove = Math.floor(Math.random() * position.piece.validMoves.length);
         let j: number = 0;
-        for (let validMove of position.piece.validMoves) {        
+        for (let validMove of position.piece.validMoves) {
           if (j === randomMove) {
             move = validMove;
           }
           j++;
         }
+        let positionMove = this.getPosition(move);
         if (position.piece.possibleTakes.includes(move)) {
-          let original: Piece = move.piece;
+          let original: Piece = positionMove.piece;
           document.getElementById(original.identifier)!.style.display = 'none';
         }
-        this.movePiece(position, move)
+        this.movePiece(position, positionMove);
       }
       i++;
     }
