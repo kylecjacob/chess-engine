@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Piece } from '../models/Piece';
-import { Position } from '../models/Position';
-import { Pawn } from '../models/Pawn';
-import { Rook } from '../models/Rook';
-import { Knight } from '../models/Knight';
-import { Bishop } from '../models/Bishop';
-import { Queen } from '../models/Queen';
-import { Board } from '../models/Board';
+import { Piece } from '../../models/Piece';
+import { Position } from '../../models/Position';
+import { Pawn } from '../../models/Pawn';
+import { Rook } from '../../models/Rook';
+import { Knight } from '../../models/Knight';
+import { Bishop } from '../../models/Bishop';
+import { Queen } from '../../models/Queen';
+import { Board } from '../../models/Board';
 import { v4 as uuidv4 } from 'uuid';
-import { Game } from '../models/Game';
-import { GameService } from '../services/game.service';
+import { Game } from '../../models/Game';
+import { GameService } from '../../services/game.service';
 
 @Component({
-  selector: 'app-board',
+  selector: 'chess-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css']
 })
@@ -24,31 +24,29 @@ export class BoardComponent implements OnInit {
   spaceInContext: Position = new Position();
   promotionSpaceInContext: Position = new Position();  
   turn: string = '';  
-  game: Game = new Game(new Board(), '');
+  game: Game = new Game(new Board(), '', []);
+  move1: string = '';
+  move2: string = '';
 
   constructor(private gameService: GameService) { }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     let gameId = localStorage.getItem('gameId');
     if (gameId !== null) {
-      console.log('there is already a game in context');
       // show the popup that says 'You have a game in session, would you like to continue?'
       this.gameService.getGame(gameId).subscribe(game => {
-        this.game = new Game(new Board(game.board), game._id);
+        this.game = new Game(new Board(game.board), game._id, game.moves);
         this.board.initializePieces();
       });
     } else {
-      console.log('new game');
-      let _id: string = uuidv4();
-      this.game = new Game(new Board(), _id);
-      localStorage.setItem('gameId', _id);
-      this.gameService.addNewGame(this.game).subscribe();
+      this.createNewGame();
     }
   }
 
   async onSpaceClicked(spaceStr: string): Promise<void> {
-    console.log(this.board);
     let space: Position = this.getPosition(spaceStr);
+    let isTake: boolean = false;
+    let isCastle: boolean = false;
     if (space.hasPiece && space.piece.color === 'white') {
       this.onPieceClicked(space);
     } else if (this.pieceClicked && this.pieceInContext) { // if not then check if there is a piece in context and if it's a valid move
@@ -57,6 +55,7 @@ export class BoardComponent implements OnInit {
           return this.showPawnPromotionDisplay(this.spaceInContext, space);
         }
         if (this.pieceInContext.possibleTakes.includes(spaceStr)) {
+          isTake = true
           let original: Piece = space.piece;
           document.getElementById(original.identifier)!.style.display = 'none';
         }
@@ -65,17 +64,25 @@ export class BoardComponent implements OnInit {
           if (moveDistance === 2) { // King side castle
             let h1: Position = this.board.getPosition('h', 1);
             let f1: Position = this.board.getPosition('f', 1);
+            isCastle = true;
             this.movePiece(h1, f1);
+            this.move1 = this.getMove(h1, f1, false, true, false);
           } else if (moveDistance === -2) { // Queen side castle 
             let a1: Position = this.board.getPosition('a', 1);
             let d1: Position = this.board.getPosition('d', 1);
+            isCastle = true;
             this.movePiece(a1, d1);
+            this.move1 = this.getMove(a1, d1, false, false, true);
           }
         }
         this.movePiece(this.spaceInContext, space);
+        if (!isCastle) {
+          this.move1 = this.getMove(this.spaceInContext, space, isTake);
+        }
         this.clearValidMoveIndicators();
         this.pieceClicked = false;
         await this.generateCpuMove();
+        this.logMoves();
         this.gameService.updateGame(this.game._id, this.game).subscribe();
       }
     }
@@ -84,6 +91,7 @@ export class BoardComponent implements OnInit {
   async generateCpuMove(): Promise<void> {
     await this.delay(1);
     this.board.getCpuMoves();
+    let isTake: boolean = false;
     let positionsWithMove: Position[] = this.board.getCpuPositionsWithMoves();
     let randomPosition = Math.floor(Math.random() * positionsWithMove.length);
     let i: number = 0;
@@ -100,10 +108,12 @@ export class BoardComponent implements OnInit {
         }
         let positionMove = this.getPosition(move);
         if (position.piece.possibleTakes.includes(move)) {
+          isTake = true;
           let original: Piece = positionMove.piece;
           document.getElementById(original.identifier)!.style.display = 'none';
         }
         this.movePiece(position, positionMove);
+        this.move2 = this.getMove(position, positionMove, isTake);
       }
       i++;
     }
@@ -136,14 +146,17 @@ export class BoardComponent implements OnInit {
   onPromotionPieceClicked(type: string): void {
     this.clearValidMoveIndicators();
     this.hidePawnPromotionDisplay();
+    let isTake: boolean = false;
     let file: string = this.promotionSpaceInContext.file;
     let rank: number = this.promotionSpaceInContext.rank;
     let space: Position = this.board.getPosition(file, rank);
     if (this.promotionSpaceInContext.hasPiece) {
+      isTake = true;
       let originalPiece = document.getElementById(this.promotionSpaceInContext.piece.identifier)!;
       originalPiece.style.display = 'none';
     }
     this.movePiece(this.spaceInContext, space);
+    this.move1 = this.getMove(this.spaceInContext, space, isTake);
     let piece: Piece = this.getPromotionPiece(type);
     space.piece = piece;
     space.hasPiece = true;
@@ -209,6 +222,55 @@ export class BoardComponent implements OnInit {
 
   getPosition(space: string): Position {
     return this.board.getPosition(space[0], parseInt(space[1]));
+  }
+
+  createNewGame(): void {
+    let _id: string = uuidv4();
+    this.game = new Game(new Board(), _id, []);
+    localStorage.setItem('gameId', _id);
+    this.board.initializePieces();
+    this.gameService.addNewGame(this.game).subscribe();
+  }
+
+  getMove(origin: Position, destination: Position, isTake: boolean, kingSideCastle: boolean = false, queenSideCastle: boolean = false): string {
+    let move: string = '';
+    switch (origin.piece.type) {
+      case 'pawn':
+        move += '';
+        break;
+      case 'knight':
+        move += 'N';
+        break;
+      case 'rook':
+        move += 'R'
+        break;
+      case 'bishop':
+        move += 'B';
+        break;
+      case 'queen':
+        move += 'Q';
+        break;
+      case 'king':
+        move += 'K';
+        break;
+    }
+    if (isTake && origin.piece.type === 'pawn') {
+      move += `${origin.file}x`;
+    } else if (isTake) {
+      move += 'x';
+    }
+    if (kingSideCastle) {
+      move = 'O-O';
+    } else if (queenSideCastle) {
+      move = 'O-O-O';
+    } else {
+      move += destination.toString();
+    }
+    return move;
+  }
+
+  logMoves(): void {    
+    this.game.moves.push(`${this.game.moves.length + 1}.\u00A0\u00A0\u00A0\u00A0${this.move1}\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0${this.move2}`);
   }
 
   get board(): Board {

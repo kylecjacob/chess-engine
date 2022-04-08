@@ -25,6 +25,7 @@ const GameSchema = mongoose.Schema({
         ],
         _id: false
     },
+    moves: [],
     turn: String,
     _id: String
 }, { typeKey: '$type' });
