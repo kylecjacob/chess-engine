@@ -8,6 +8,7 @@ span {
     top: 0;
     left: -250px;
     min-width: 240px;
+    max-width: 240px;
     height: 600px;
     border-style: solid;
     border-width: 1px;
@@ -17,4 +18,23 @@ span {
 .title {
     display: flex;
     justify-content: center;
+}
+
+.column {
+    float: left;
+}
+
+.move {
+    width: 40%;
+}
+
+.index {
+    width: 10%;
+}
+
+.row {
+    display: flex;
+    max-width: 240px;
+    margin-left: 0;
+    margin-right: 0;
 }

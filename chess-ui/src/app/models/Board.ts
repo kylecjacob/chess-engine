@@ -95,11 +95,13 @@ export class Board {
         return this.positions.find(x => x.file === file && x.rank === rank)!;
     }
 
+    /** Get all CPU positions that have a valid move */
     getCpuPositionsWithMoves(): Position[] {
         return this.positions.filter(x => x.hasPiece && x.piece.color === 'black' && x.piece.validMoves.length > 0);
     }
 
-    getCpuMoves(): void {
+    /** Set moves for all black pieces */
+    setCpuMoves(): void {
         this.positions.filter(x => x.hasPiece && x.piece.color === 'black').forEach(position => {
           position.piece.getMoves(this.positions, position);
         });

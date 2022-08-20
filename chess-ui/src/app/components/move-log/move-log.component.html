@@ -3,6 +3,16 @@
         <span>Moves</span>
     </div>
     <div class="moves" *ngFor="let move of moves; let i = index">
-        <span>{{move}}</span>
+        <div class="row">
+            <div class="column index">
+                <span>{{i+1}}. </span>
+            </div>
+            <div class="column move">
+                <span>{{move[0]}}</span>
+            </div>
+            <div class="column move">
+                <span>{{move[1]}}</span>
+            </div>
+        </div>
     </div>
 </div>

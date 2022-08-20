@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./move-log.component.css']
 })
 export class MoveLogComponent implements OnInit {
-  @Input() moves!: string[];
+  @Input() moves!: string[][];
   constructor() { }
 
   ngOnInit(): void { }
