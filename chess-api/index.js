@@ -42,6 +42,15 @@ app.put('/api/game/:id', async (req, res) => {
     }
 });
 
+app.delete('/api/game/:id', async (req, res) => {
+    const result = await Game.findByIdAndDelete(req.params.id, { new: true });
+    if (!result) {
+        res.status(400).json('Game not found');
+    } else {
+        res.send(result);
+    }
+});
+
 const PORT = 8000;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);

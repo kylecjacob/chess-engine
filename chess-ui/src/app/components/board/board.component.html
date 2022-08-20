@@ -270,6 +270,6 @@
     <div id="new-game-button">
         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#new-game-modal">New game</button>
     </div>
-    <chess-new-game-modal (newGameClicked)="createNewGame()"></chess-new-game-modal>
+    <chess-new-game-modal (newGameClicked)="onNewGameClicked()"></chess-new-game-modal>
     <chess-move-log [moves]="game.moves"></chess-move-log>
 </div>

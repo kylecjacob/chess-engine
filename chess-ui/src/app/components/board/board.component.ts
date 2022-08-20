@@ -248,7 +248,18 @@ export class BoardComponent implements OnInit {
     return this.board.getPosition(space[0], parseInt(space[1]));
   }
 
-  /** Create a new game */
+  /** Deletes the current game and creates a new one */
+  onNewGameClicked(): void {
+    this.deleteCurrentGame();
+    this.createNewGame();
+  }
+
+  /** Deletes current game */
+  deleteCurrentGame(): void {
+    this.gameService.deleteGame(this.game._id).subscribe();
+  }
+
+  /** Creates a new game */
   createNewGame(): void {
     let _id: string = uuidv4();
     this.game = new Game(new Board(), _id, []);
