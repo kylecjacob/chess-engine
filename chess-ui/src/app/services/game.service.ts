@@ -22,6 +22,10 @@ export class GameService {
     return this.http.put<Game>(this.baseUrl + `/api/game/${gameId}`, game).pipe();
   }
 
+  deleteGame(gameId: string): Observable<Game> {
+    return this.http.delete<Game>(this.baseUrl + `/api/game/${gameId}`).pipe();
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
